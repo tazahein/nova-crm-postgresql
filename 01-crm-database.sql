@@ -33,6 +33,15 @@ ON CONFLICT (email) DO UPDATE
 SET company = EXCLUDED.company,
     phone   = EXCLUDED.phone;
 
+-- ----------------------------------------------------------
+-- 2b. SEED CONTACTS — referenced by later files via email
+-- (email is the stable key; ids are never referenced anywhere)
+-- ----------------------------------------------------------
+INSERT INTO contacts (name, email, company, phone) VALUES
+    ('Nina Wattana',  'nina@example.com',  'Wattana Design',  '082-000-0001'),
+    ('Arun Chai',     'arun@example.com',  'Chai Logistics',  '083-000-0002'),
+    ('Mali Suksan',   'mali@example.com',  'Suksan Cafe',     '084-000-0003');
+
 
 -- ------------------------------------------------------------
 -- 3. SCHEMA — interactions table (one-to-many)

@@ -47,11 +47,11 @@ EXECUTE FUNCTION set_updated_at();
 -- Note: SELECT real contact ids first, never guess —
 -- SERIAL sequences can have gaps.
 -- ------------------------------------------------------------
-INSERT INTO leads (contact_id, lead_score, source) VALUES
-    (3, 'Hot',  'Email'),
-    (5, 'Warm', 'Referral'),
-    (6, 'Cold', 'Email'),
-    (7, 'Warm', 'Fiverr');
+INSERT INTO leads (contact_id, lead_score, source, stage) VALUES
+    ((SELECT id FROM contacts WHERE email = 'somchai@example.com'), 'Hot',  'Email',    'Won'),
+    ((SELECT id FROM contacts WHERE email = 'nina@example.com'),    'Warm', 'Referral', 'Won'),
+    ((SELECT id FROM contacts WHERE email = 'arun@example.com'),    'Cold', 'Email',    'New'),
+    ((SELECT id FROM contacts WHERE email = 'mali@example.com'),    'Warm', 'Fiverr',   'New');
 
 
 -- ------------------------------------------------------------

@@ -65,11 +65,16 @@ WHERE stage = 'Won';
 
 -- Sample orders.
 INSERT INTO orders (customer_id, description, amount, status) VALUES
-    (1, 'Lead scoring automation',   320.00, 'Paid'),
-    (1, 'Appointment booking bot',   180.00, 'Paid'),
-    (1, 'Workflow maintenance',      250.00, 'Pending'),
-    (2, 'Appointment booking bot',   180.00, 'Paid'),
-    (2, 'Auto-responder setup',       90.00, 'Pending');
+    ((SELECT c.id FROM customers c JOIN contacts ct ON ct.id = c.contact_id
+       WHERE ct.email = 'somchai@example.com'), 'Lead scoring automation', 320.00, 'Paid'),
+    ((SELECT c.id FROM customers c JOIN contacts ct ON ct.id = c.contact_id
+       WHERE ct.email = 'somchai@example.com'), 'Appointment booking bot', 180.00, 'Paid'),
+    ((SELECT c.id FROM customers c JOIN contacts ct ON ct.id = c.contact_id
+       WHERE ct.email = 'somchai@example.com'), 'Workflow maintenance',    250.00, 'Pending'),
+    ((SELECT c.id FROM customers c JOIN contacts ct ON ct.id = c.contact_id
+       WHERE ct.email = 'nina@example.com'),    'Appointment booking bot', 180.00, 'Paid'),
+    ((SELECT c.id FROM customers c JOIN contacts ct ON ct.id = c.contact_id
+       WHERE ct.email = 'nina@example.com'),    'Auto-responder setup',     90.00, 'Pending');
 
 -- ------------------------------------------------------------
 -- 3. PORTAL REPORTS
